@@ -1,0 +1,5 @@
+﻿User-agent: *
+Disallow: 
+
+Sitemap: https://blog.imzjw.cn/sitemap.xml
+Sitemap: https://blog.imzjw.cn/baidusitemap.xml
