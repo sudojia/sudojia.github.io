@@ -991,6 +991,13 @@
   </url>
   
   <url>
+    <loc>https://blog.imzjw.cn/tags/JRebel/</loc>
+    <lastmod>2023-10-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.imzjw.cn/tags/Qodana/</loc>
     <lastmod>2023-10-25</lastmod>
     <changefreq>daily</changefreq>
@@ -1349,13 +1356,6 @@
   
   <url>
     <loc>https://blog.imzjw.cn/tags/Json/</loc>
-    <lastmod>2023-10-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.imzjw.cn/tags/JRebel/</loc>
     <lastmod>2023-10-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
