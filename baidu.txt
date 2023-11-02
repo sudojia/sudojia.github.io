@@ -11,7 +11,6 @@ https://blog.imzjw.cn/posts/2c98841c/
 https://blog.imzjw.cn/posts/7956c904/
 https://blog.imzjw.cn/posts/d347d656/
 https://blog.imzjw.cn/posts/e9c3c84f/
-https://blog.imzjw.cn/posts/75dadae5/
 https://blog.imzjw.cn/posts/8419c5ed/
 https://blog.imzjw.cn/posts/mx-mail/
 https://blog.imzjw.cn/posts/hexo-vercel-config/

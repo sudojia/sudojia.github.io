@@ -93,13 +93,6 @@
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/posts/75dadae5/</loc>
-    
-    <lastmod>2021-05-25</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.imzjw.cn/posts/8419c5ed/</loc>
     
     <lastmod>2021-05-23</lastmod>
@@ -1131,13 +1124,6 @@
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/tags/Telegram/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.imzjw.cn/tags/%E5%A3%81%E7%BA%B8/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1462,48 +1448,6 @@
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/Microsoft-OneDrive/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E4%B8%B4%E6%97%B6%E9%82%AE%E7%AE%B1/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/Vue/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E7%BD%91%E6%98%93%E4%BA%91/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/RSS/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/Google/</loc>
-    <lastmod>2023-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E5%A3%81%E7%BA%B8/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1546,7 +1490,42 @@
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Lombok/</loc>
+    <loc>https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/Vue/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/Google/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/Microsoft-OneDrive/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E4%B8%B4%E6%97%B6%E9%82%AE%E7%AE%B1/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E7%BD%91%E6%98%93%E4%BA%91/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/RSS/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1554,6 +1533,13 @@
   
   <url>
     <loc>https://blog.imzjw.cn/categories/%E7%94%9F%E6%B4%BB/%E6%97%A5%E5%BF%97/</loc>
+    <lastmod>2023-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Lombok/</loc>
     <lastmod>2023-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
