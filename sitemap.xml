@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.imzjw.cn/posts/26ba0825/</loc>
+    
+    <lastmod>2024-04-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.imzjw.cn/posts/dfb56fb5/</loc>
     
     <lastmod>2024-04-13</lastmod>
@@ -1567,14 +1576,14 @@
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/MyBatis-Plus/</loc>
+    <loc>https://blog.imzjw.cn/categories/Hexo/%E5%9B%BE%E5%BA%8A/</loc>
     <lastmod>2024-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/categories/Hexo/%E5%9B%BE%E5%BA%8A/</loc>
+    <loc>https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/MyBatis-Plus/</loc>
     <lastmod>2024-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1679,13 +1688,6 @@
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/Microsoft-OneDrive/</loc>
-    <lastmod>2024-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E5%A3%81%E7%BA%B8/</loc>
     <lastmod>2024-04-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -1736,6 +1738,13 @@
   
   <url>
     <loc>https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/Google/</loc>
+    <lastmod>2024-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/Microsoft-OneDrive/</loc>
     <lastmod>2024-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
