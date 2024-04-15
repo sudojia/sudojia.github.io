@@ -1688,6 +1688,13 @@
   </url>
   
   <url>
+    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/Microsoft-OneDrive/</loc>
+    <lastmod>2024-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E5%A3%81%E7%BA%B8/</loc>
     <lastmod>2024-04-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -1738,13 +1745,6 @@
   
   <url>
     <loc>https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/Google/</loc>
-    <lastmod>2024-04-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/Microsoft-OneDrive/</loc>
     <lastmod>2024-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
