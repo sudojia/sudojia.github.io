@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>折腾了三天，终于解决了使用多吉云首页打不开问题</title>
+      <link href="/posts/dd790023/"/>
+      <url>/posts/dd790023/</url>
+      
+        <content type="html"><![CDATA[<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>在使用多吉云的时候，打开我的部落格是这样的</p><p><img src="https://jsd.cdn.zzko.cn/npm/yc-pic@1.0.2/p/dd790023/20240419135139.webp" alt="20240419135139" style="zoom: 33%;" /></p><p>这让我百思不得其解，打开控制台，发现是这个 CSS 加载不了</p><p><img src="https://jsd.cdn.zzko.cn/npm/yc-pic@1.0.2/p/dd790023/20240419135512.webp" alt="20240419135512" style="zoom: 67%;" /></p><p>当我打开了 Proxy 去访问，结果又能访问到，所以一开始我的猜测就是会不会这个 CSS 没走多吉呢，而是走的 GitHub 直连。</p><p>然后就问了客服</p><p><img src="https://jsd.cdn.zzko.cn/npm/yc-pic@1.0.2/p/dd790023/20240419135853.webp" alt="20240419135853" style="zoom: 50%;" /></p><p><img src="https://jsd.cdn.zzko.cn/npm/yc-pic@1.0.2/p/dd790023/20240419135919.webp" alt="20240419135919" style="zoom:50%;" /></p><p>客服就建议我在 CSS 后缀里面加个版本号试试，首页确实是可以打开，但是并没什么用，我其它的 XML，JS 等，反正就是我博客根目录的文件全被屏蔽了</p><p><img src="https://jsd.cdn.zzko.cn/npm/yc-pic@1.0.2/p/dd790023/20240419140026.webp" alt="20240419140026" style="zoom: 50%;" /></p><p>后面问了 <a href="https://hin.cool/">@瓦解哥</a> 也是无解，最后换了个大胆的想法，就是会不会是 CDN 访问不了 GitHub 才导致的？</p><p>紧接着联想到 <a href="https://vercel.app/">Vercel</a> 有国内的 CNAME：<code>cname-china.vercel.com</code></p><p><img src="https://jsd.cdn.zzko.cn/npm/yc-pic@1.0.2/p/dd790023/20240419141808.webp" alt="20240419141808"></p><p>最后才因此解决这个鬼问题！</p><p>心累，刚回来折腾一下部落格就碰到这个鬼问题！</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>就是因为 GitHub 被墙了，多吉的 CDN 回源的过程中产生超时！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活 </category>
+          
+          <category> 日志 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 多吉云 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hexo 升级食用指南</title>
       <link href="/posts/26ba0825/"/>
       <url>/posts/26ba0825/</url>
@@ -118,7 +145,7 @@
       <link href="/posts/b23downloader/"/>
       <url>/posts/b23downloader/</url>
       
-        <content type="html"><![CDATA[<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>B23Downloader 是一款下载 B 站视频（投稿视频、直播、番剧、电影等）的软件，使用 Qt、C++ 开发，只要输入链接或 BV 号即可解析下载。</p><p>该项目已在 GitHub 开源！</p><a class="ghcard" rel="external nofollow noopener noreferrer" href="https://github.com/vooidzero/B23Downloader"><img src="https://github-readme-stats.vercel.app/api/pin/?username=vooidzero&repo=B23Downloader&show_owner=true"/></a> <h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><div class="btns rounded grid5">            <a class="button" href='https://github.com/vooidzero/B23Downloader/releases' title='下载地址'><i class='fas fa-download'></i>下载地址</a>          </div><h2 id="食用方法"><a href="#食用方法" class="headerlink" title="食用方法"></a>食用方法</h2><p>下载完成后直接打开即可，就是一个单文件</p><p>然后输入 BV 号即可下载</p><p><img src="https://npm.elemecdn.com/cpdd/posts/b23downloader/20220117215726.webp" alt="images"></p><p>番号也可以</p><p><img src="https://npm.elemecdn.com/cpdd/posts/b23downloader/20220117215948.webp" alt="images"></p><p>直播也是可以的</p><p><img src="https://npm.elemecdn.com/cpdd/posts/b23downloader/20220117220401.webp" alt="images"></p><p>详情请参考【<a href="https://github.com/vooidzero/B23Downloader#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">官方文档</a>】</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>B23Downloader 是一款下载 B 站视频（投稿视频、直播、番剧、电影等）的软件，使用 Qt、C++ 开发，只要输入链接或 BV 号即可解析下载。</p><p>该项目已在 GitHub 开源！</p><div class="tag link"><a class="link-card" title="vooidzero/B23Downloader" href="https://github.com/vooidzero/B23Downloader"><div class="left"><img src="https://npm.elemecdn.com/cover_img/top_img/about/github_logo.webp"/></div><div class="right"><p class="text">vooidzero/B23Downloader</p><p class="url">https://github.com/vooidzero/B23Downloader</p></div></a></div><h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><div class="btns rounded grid5">            <a class="button" href='https://github.com/vooidzero/B23Downloader/releases' title='下载地址'><i class='fas fa-download'></i>下载地址</a>          </div><h2 id="食用方法"><a href="#食用方法" class="headerlink" title="食用方法"></a>食用方法</h2><p>下载完成后直接打开即可，就是一个单文件</p><p>然后输入 BV 号即可下载</p><p><img src="https://npm.elemecdn.com/cpdd/posts/b23downloader/20220117215726.webp" alt="images"></p><p>番号也可以</p><p><img src="https://npm.elemecdn.com/cpdd/posts/b23downloader/20220117215948.webp" alt="images"></p><p>直播也是可以的</p><p><img src="https://npm.elemecdn.com/cpdd/posts/b23downloader/20220117220401.webp" alt="images"></p><p>详情请参考【<a href="https://github.com/vooidzero/B23Downloader#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">官方文档</a>】</p>]]></content>
       
       
       <categories>
