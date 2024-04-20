@@ -1067,14 +1067,14 @@
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/tags/GitHub/</loc>
+    <loc>https://blog.imzjw.cn/tags/Git/</loc>
     <lastmod>2024-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/tags/Git/</loc>
+    <loc>https://blog.imzjw.cn/tags/GitHub/</loc>
     <lastmod>2024-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1538,7 +1538,7 @@
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Git/</loc>
+    <loc>https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/GitHub/</loc>
     <lastmod>2024-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1552,14 +1552,14 @@
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Docker/</loc>
+    <loc>https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Git/</loc>
     <lastmod>2024-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/GitHub/</loc>
+    <loc>https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Docker/</loc>
     <lastmod>2024-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

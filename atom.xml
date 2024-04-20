@@ -310,9 +310,9 @@
     
     <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
     
-    <category term="Docker" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Docker/"/>
-    
     <category term="GitHub" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/GitHub/"/>
+    
+    <category term="Docker" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Docker/"/>
     
     
     <category term="Docker" scheme="https://blog.imzjw.cn/tags/Docker/"/>
@@ -1465,9 +1465,9 @@
     <category term="Git" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Git/"/>
     
     
-    <category term="GitHub" scheme="https://blog.imzjw.cn/tags/GitHub/"/>
-    
     <category term="Git" scheme="https://blog.imzjw.cn/tags/Git/"/>
+    
+    <category term="GitHub" scheme="https://blog.imzjw.cn/tags/GitHub/"/>
     
   </entry>
   
