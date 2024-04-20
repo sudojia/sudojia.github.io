@@ -341,9 +341,9 @@
           
           <category> 后端 </category>
           
-          <category> GitHub </category>
-          
           <category> Docker </category>
+          
+          <category> GitHub </category>
           
       </categories>
       
@@ -1680,9 +1680,9 @@
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> GitHub </tag>
+            
+            <tag> Git </tag>
             
         </tags>
       
