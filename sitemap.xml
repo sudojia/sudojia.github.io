@@ -245,6 +245,15 @@
   </url>
   
   <url>
+    <loc>https://blog.imzjw.cn/posts/75dadae5/</loc>
+    
+    <lastmod>2021-04-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.imzjw.cn/posts/8983923f/</loc>
     
     <lastmod>2021-04-23</lastmod>
@@ -1237,14 +1246,14 @@
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/tags/Nginx/</loc>
+    <loc>https://blog.imzjw.cn/tags/Druid/</loc>
     <lastmod>2024-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.imzjw.cn/tags/Druid/</loc>
+    <loc>https://blog.imzjw.cn/tags/Nginx/</loc>
     <lastmod>2024-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1329,6 +1338,13 @@
   
   <url>
     <loc>https://blog.imzjw.cn/tags/%E4%B8%8B%E8%BD%BD/</loc>
+    <lastmod>2024-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.imzjw.cn/tags/Telegram-Bot/</loc>
     <lastmod>2024-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1722,6 +1738,13 @@
   </url>
   
   <url>
+    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/Microsoft-OneDrive/</loc>
+    <lastmod>2024-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E5%A3%81%E7%BA%B8/</loc>
     <lastmod>2024-04-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1772,13 +1795,6 @@
   
   <url>
     <loc>https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/Google/</loc>
-    <lastmod>2024-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/Microsoft-OneDrive/</loc>
     <lastmod>2024-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
