@@ -6,7 +6,7 @@
   <link href="https://blog.imzjw.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.imzjw.cn/"/>
-  <updated>2024-04-21T07:35:06.000Z</updated>
+  <updated>2024-04-22T10:19:33.000Z</updated>
   <id>https://blog.imzjw.cn/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>重新整理部落格分类</title>
+    <link href="https://blog.imzjw.cn/posts/88c14d33/"/>
+    <id>https://blog.imzjw.cn/posts/88c14d33/</id>
+    <published>2024-04-22T10:19:33.000Z</published>
+    <updated>2024-04-22T10:19:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在今天下午，我把我部落格分类重新整理了个遍</p><p>原分类：</p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/88c14d33/240422-a59c133159018b97.webp" alt="image-20240422183346865"></p><p>又臭又长！</p><p>整理后的分类：</p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/88c14d33/240422-3f9d33e6696cca9c.webp" alt="image-20240422183414297"></p><p>干净简洁！</p><p>分类说明：</p><ul><li><strong>Develop</strong>：放一些关于后端的、前端的、Linux，总之有关开发的都放在这了</li><li><strong>Hexo</strong>：见其字如知其意</li><li><strong>实用分享</strong>：分享一些实用的工具、网站、好玩的东西等</li><li><strong>经验分享</strong>：记录自己踩下的坑</li><li><strong>闲聊杂话</strong>：瞎扯，比如这篇文章😁</li></ul>]]></content>
+    
+    
+    <summary type="html">在今天下午，我把我部落格分类重新整理了个遍，原分类又臭又长，整理后的分类干净整洁</summary>
+    
+    
+    
+    <category term="闲聊杂话" scheme="https://blog.imzjw.cn/categories/%E9%97%B2%E8%81%8A%E6%9D%82%E8%AF%9D/"/>
+    
+    
+    <category term="Hexo" scheme="https://blog.imzjw.cn/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决网站 URL 加个 index.html 后 Twikoo 评论不显示问题</title>
+    <link href="https://blog.imzjw.cn/posts/51a5d1ca/"/>
+    <id>https://blog.imzjw.cn/posts/51a5d1ca/</id>
+    <published>2024-04-22T07:45:11.000Z</published>
+    <updated>2024-04-22T07:45:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>其实这问题也是最开始的时候用 <code>hexo-abbrlink</code> 规则没配置好，导致它可以在后面加个 <strong>index.html</strong></p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/51a5d1ca/240422-21830a3e04f6f401.webp" alt="image-20240422155420310"></p><p>这种规则的话，它是可以在后面加个 <strong>index.html</strong> 的</p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/51a5d1ca/240422-e86c645986191f8f.webp" alt="image-20240422155648132"></p><p>那这样的话就是两个页面了，所以在 <code>/posts/b74f504f/</code> 页面的评论在 <code>/posts/b74f504f/index.html</code> 是看不到的。</p><h2 id="解决措施"><a href="#解决措施" class="headerlink" title="解决措施"></a>解决措施</h2><p>你可以用 Navicat Premium 15 登录 MongoDB 进行修改，吧所有后面带 index.html 的删了。<psw>嘿嘿，开个玩笑</psw></p><p>在 Twikoo 初始函数的时候添加 <code>location.pathname.replace(/index\.html$/, &#39;&#39;),</code></p><p>Butterfly 主题可以在 <code>themes\butterfly\layout\includes\third-party\comments\twikoo.pug</code> 进行修改，其它主题的话，就找到这段代码加上就好了</p><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const init = () =&gt; &#123;</span><br><span class="line">      twikoo.init(Object.assign(&#123;</span><br><span class="line">        el: &#x27;#twikoo-wrap&#x27;,</span><br><span class="line">        envId: &#x27;!&#123;envId&#125;&#x27;,</span><br><span class="line"><span class="addition">+        path: location.pathname.replace(/index\.html$/, &#x27;&#x27;),</span></span><br><span class="line">        region: &#x27;!&#123;region&#125;&#x27;,</span><br><span class="line">        onCommentLoaded: () =&gt; &#123;</span><br><span class="line">          btf.loadLightbox(document.querySelectorAll(&#x27;#twikoo .tk-content img:not(.tk-owo-emotion)&#x27;))</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, !&#123;JSON.stringify(option)&#125;))</span><br></pre></td></tr></table></figure><p>现在不管怎么请求 <strong>index.html</strong>，他请求的数据都是没有带 <strong>index.html</strong> 的了，响应回来的数据也是一样的了。</p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/51a5d1ca/240422-3ade940cf6cb6796.webp" alt="image-20240422162918881" style="zoom:50%;" /></p><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>新站的话链接规则改成 <code>posts/:abbrlink.html</code> 就没这个问题了，老站还是不要改了。</p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/51a5d1ca/240422-3c0a232d2c336dcd.webp" alt="image-20240422163317952"></p><p>参考</p><ul><li><a href="https://github.com/twikoojs/twikoo/issues/608">issues</a></li></ul>]]></content>
+    
+    
+    <summary type="html">其实这问题也是最开始的时候用 hexo-abbrlink，规则没配置好，导致它可以在后面加个 index.html，这种规则的话，它是可以在后面加个 index.html 的</summary>
+    
+    
+    
+    <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
+    
+    
+    <category term="Hexo" scheme="https://blog.imzjw.cn/tags/Hexo/"/>
+    
+    <category term="Twikoo" scheme="https://blog.imzjw.cn/tags/Twikoo/"/>
+    
+  </entry>
   
   <entry>
     <title>分享几个免费使用 GPT-4、GPT-4 Turbo、DALL-E 3 等大模型 AI</title>
@@ -30,7 +74,7 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="人工智能" scheme="https://blog.imzjw.cn/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
@@ -54,10 +98,6 @@
     <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
     
     
-    <category term="GitHub Actions" scheme="https://blog.imzjw.cn/tags/GitHub-Actions/"/>
-    
-    <category term="Hexo" scheme="https://blog.imzjw.cn/tags/Hexo/"/>
-    
     <category term="多吉云" scheme="https://blog.imzjw.cn/tags/%E5%A4%9A%E5%90%89%E4%BA%91/"/>
     
   </entry>
@@ -76,9 +116,7 @@
     
     
     
-    <category term="生活" scheme="https://blog.imzjw.cn/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    <category term="日志" scheme="https://blog.imzjw.cn/categories/%E7%94%9F%E6%B4%BB/%E6%97%A5%E5%BF%97/"/>
+    <category term="经验分享" scheme="https://blog.imzjw.cn/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="多吉云" scheme="https://blog.imzjw.cn/tags/%E5%A4%9A%E5%90%89%E4%BA%91/"/>
@@ -120,9 +158,7 @@
     
     
     
-    <category term="生活" scheme="https://blog.imzjw.cn/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    <category term="日志" scheme="https://blog.imzjw.cn/categories/%E7%94%9F%E6%B4%BB/%E6%97%A5%E5%BF%97/"/>
+    <category term="闲聊杂话" scheme="https://blog.imzjw.cn/categories/%E9%97%B2%E8%81%8A%E6%9D%82%E8%AF%9D/"/>
     
     
     <category term="人工智能" scheme="https://blog.imzjw.cn/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
@@ -143,16 +179,10 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
-    
-    <category term="网站搭建" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="图床" scheme="https://blog.imzjw.cn/tags/%E5%9B%BE%E5%BA%8A/"/>
-    
-    <category term="Alist" scheme="https://blog.imzjw.cn/tags/Alist/"/>
-    
-    <category term="PicList" scheme="https://blog.imzjw.cn/tags/PicList/"/>
     
   </entry>
   
@@ -170,12 +200,10 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
-    
-    <category term="Microsoft OneDrive" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/Microsoft-OneDrive/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
-    <category term="Microsoft OneDrive" scheme="https://blog.imzjw.cn/tags/Microsoft-OneDrive/"/>
+    <category term="Microsoft" scheme="https://blog.imzjw.cn/tags/Microsoft/"/>
     
   </entry>
   
@@ -193,10 +221,10 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
-    <category term="下载" scheme="https://blog.imzjw.cn/tags/%E4%B8%8B%E8%BD%BD/"/>
+    <category term="哔哩哔哩" scheme="https://blog.imzjw.cn/tags/%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9/"/>
     
   </entry>
   
@@ -214,9 +242,7 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
-    
-    <category term="壁纸" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E5%A3%81%E7%BA%B8/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="壁纸" scheme="https://blog.imzjw.cn/tags/%E5%A3%81%E7%BA%B8/"/>
@@ -237,10 +263,10 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
-    <category term="Office 365 E5" scheme="https://blog.imzjw.cn/tags/Office-365-E5/"/>
+    <category term="Microsoft" scheme="https://blog.imzjw.cn/tags/Microsoft/"/>
     
   </entry>
   
@@ -258,9 +284,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Java" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Java/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Java" scheme="https://blog.imzjw.cn/tags/Java/"/>
@@ -281,9 +305,7 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
-    
-    <category term="网易云" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E7%BD%91%E6%98%93%E4%BA%91/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="网易云" scheme="https://blog.imzjw.cn/tags/%E7%BD%91%E6%98%93%E4%BA%91/"/>
@@ -304,14 +326,10 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
-    
-    <category term="RSS" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/RSS/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="RSS" scheme="https://blog.imzjw.cn/tags/RSS/"/>
-    
-    <category term="inkrss" scheme="https://blog.imzjw.cn/tags/inkrss/"/>
     
   </entry>
   
@@ -325,18 +343,12 @@
     <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>为什么要用 GitHub Actions 来为我们构建 Dockerfile 呢？我直接在服务器上 <code>docker build</code> 不行么？你这不是多此一举吗</p><p>肯定有人会有这种想法，因为他们不知道也没用过国内的服务器…</p><p>在国内服务器上构建的话，你甚至都可以开一把召唤师峡谷。</p><p>所以用国内服务器的可以利用 GitHub Actions 来帮我们构建  <code>Dockerfile</code>  并  <code>push</code>  到  <code>Docker Hub</code></p><h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>这里我以 Spring Boot 项目为 Demo，不过你得先去注册 <a href="https://hub.docker.com/">Docker Hub</a> 账号。</p><p>新建一个 Spring Boot 工程，里面的代码很简单，就是用来测试的</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DockerController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;success&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">actions</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;This is the Docker image I built using GitHub Actions. 🎉&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>application.yaml</code>  里，就配置了一个 8989 端口，然后就没了，最后记得打包（把打包好的移进根目录）</p><p>在项目根目录新建并编写  <code>Dockerfile</code>（也是网上抄来的，哈哈）</p><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基础镜像 jdk1.8</span></span><br><span class="line"><span class="keyword">FROM</span> java:<span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 作者</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> sudojia</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把可执行 jar 包复制到基础镜像的根目录下</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> actions_build_springboot_docker-1.0-RELEASE.jar /actions_build_springboot_docker.jar</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 镜像要暴露的端口，如要使用端口，在执行 docker run 命令时使用 -p 生效</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8989</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在镜像运行为容器后执行的命令</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;java&quot;</span>,<span class="string">&quot;-Djava.security.egd=file:/dev/./urandom&quot;</span>,<span class="string">&quot;-jar&quot;</span>,<span class="string">&quot;/actions_build_springboot_docker.jar&quot;</span>]</span></span><br></pre></td></tr></table></figure><p>项目结构就这样，只要 Dockerfile 和 JAR 包就好了</p><p><img src="https://npm.elemecdn.com/cpdd/posts/2c98841c/20210723214018.webp" alt="images"></p><p>接下来就开始编写 Actions 代码了</p><p>在项目根目录创建  <code>.github/workflows/main.yml</code></p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">BuildDockerfileImage</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="comment"># 防止 Fork 乱用 actions 设置只能手动触发构建</span></span><br><span class="line">  <span class="attr">workflow_dispatch:</span></span><br><span class="line">  <span class="attr">repository_dispatch:</span></span><br><span class="line">    <span class="attr">types:</span> <span class="string">build_docker_image</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build-and-push:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@master</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Set</span> <span class="string">up</span> <span class="string">QEMU</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">docker/setup-qemu-action@v1</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Set</span> <span class="string">up</span> <span class="string">Docker</span> <span class="string">Buildx</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">docker/setup-buildx-action@v1</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Login</span> <span class="string">to</span> <span class="string">DockerHub</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">docker/login-action@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">username:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.DOCKERHUB_USERNAME</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">password:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.DOCKERHUB_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">构建并推送到</span> <span class="string">Dockerhub</span> <span class="string">镜像仓库</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">docker/build-push-action@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">context:</span> <span class="string">.</span></span><br><span class="line">          <span class="attr">file:</span> <span class="string">./Dockerfile</span> <span class="comment"># Dockerfile 位置</span></span><br><span class="line">          <span class="attr">platforms:</span> <span class="string">linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64</span></span><br><span class="line">          <span class="attr">push:</span> <span class="literal">true</span></span><br><span class="line">          <span class="attr">tags:</span> <span class="string">|</span></span><br><span class="line">            <span class="string">xxx/actions_build_springboot</span> <span class="comment"># 改成你自己的， dockerhub用户名/镜像名</span></span><br></pre></td></tr></table></figure><div class="note warning flat"><p>注意：最后一行的 tags 配置项，需修改，用户名/镜像名（镜像名看你喜欢取什么）</p></div><p>接下来就是 GitHub 上的操作了</p><ol><li>新建仓库</li><li>在仓库配置两条密钥（<code>Setting -&gt; Secrets -&gt; New repository secret</code>）</li></ol><div class="table-container"><table><thead><tr><th style="text-align:center">Secrets Name</th><th style="text-align:center">Value</th></tr></thead><tbody><tr><td style="text-align:center">DOCKERHUB_USERNAME</td><td style="text-align:center">Docker Hub 的用户名</td></tr><tr><td style="text-align:center">DOCKERHUB_TOKEN</td><td style="text-align:center">Docker Hub Token，前往<a href="https://hub.docker.com/settings/security?generateToken=true">生成</a></td></tr></tbody></table></div><p>随后就可以直接把项目推送到 GitHub 上了。</p><p>点击仓库中的 Actions，点击  <code>Run workflow</code> （因为避免一些麻烦事，所以就设置只能手动触发构建）</p><p><img src="https://npm.elemecdn.com/cpdd/posts/2c98841c/20210723225257.webp" alt="images"></p><p>然后在 Docker Hub 就看到此镜像了</p><p><img src="https://npm.elemecdn.com/cpdd/posts/2c98841c/20210723230006.webp" alt="images"></p><p>打开 SSH 工具连接服务器把镜像拉取下来，拉取完成之后执行以下命令开始测试。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 8989:8989 [IMAGES]</span><br><span class="line"><span class="comment"># -d 是后台运行容器</span></span><br><span class="line"><span class="comment"># -p 指定端口映射（前者是宿主机端口，后者是容器的端口）一般改前者，也可以不改，可以和容器的端口一致</span></span><br><span class="line"><span class="comment"># [IMAGES] 也就是你的镜像名或者镜像 ID 都可以的啦</span></span><br></pre></td></tr></table></figure><p>打开浏览器访问  <code>http://IP:8989/success</code></p><p><img src="https://npm.elemecdn.com/cpdd/posts/2c98841c/20210723230649.webp" alt="images"></p><p>完结！</p><p>参考：</p><ul><li><a href="https://github.com/docker/build-push-action">docker/build-push-action</a></li></ul>]]></content>
     
     
-    <summary type="html">为什么要用 GitHub Actions 来为我们构建 Dockerfile 呢？我直接在服务器上 docker build 不行么？你这不是多此一举吗，肯定有人会有这种想法，因为他们不知道也没用过国内的服务器…</summary>
+    <summary type="html">为什么要用 GitHub Actions 来为我们构建 Dockerfile 呢？我直接在服务器上 docker build 不行么？你这不是多此一举吗，肯定有人会有这种想法，因为他们不知道也没用过国内的服务器</summary>
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
-    <category term="GitHub" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/GitHub/"/>
-    
-    <category term="Docker" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Docker/"/>
-    
-    
-    <category term="Docker" scheme="https://blog.imzjw.cn/tags/Docker/"/>
     
     <category term="GitHub Actions" scheme="https://blog.imzjw.cn/tags/GitHub-Actions/"/>
     
@@ -356,9 +368,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Git" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Git/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="Git" scheme="https://blog.imzjw.cn/tags/Git/"/>
@@ -379,12 +389,8 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
-    <category term="Spring Boot" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring-Boot/"/>
-    
-    
-    <category term="GitHub Actions" scheme="https://blog.imzjw.cn/tags/GitHub-Actions/"/>
     
     <category term="Spring Boot" scheme="https://blog.imzjw.cn/tags/Spring-Boot/"/>
     
@@ -404,10 +410,10 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
-    <category term="资源存储" scheme="https://blog.imzjw.cn/tags/%E8%B5%84%E6%BA%90%E5%AD%98%E5%82%A8/"/>
+    <category term="小白羊" scheme="https://blog.imzjw.cn/tags/%E5%B0%8F%E7%99%BD%E7%BE%8A/"/>
     
   </entry>
   
@@ -425,7 +431,7 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="云函数" scheme="https://blog.imzjw.cn/tags/%E4%BA%91%E5%87%BD%E6%95%B0/"/>
@@ -446,9 +452,7 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
-    
-    <category term="临时邮箱" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E4%B8%B4%E6%97%B6%E9%82%AE%E7%AE%B1/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="临时邮箱" scheme="https://blog.imzjw.cn/tags/%E4%B8%B4%E6%97%B6%E9%82%AE%E7%AE%B1/"/>
@@ -469,12 +473,8 @@
     
     
     
-    <category term="生活" scheme="https://blog.imzjw.cn/categories/%E7%94%9F%E6%B4%BB/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
-    <category term="日志" scheme="https://blog.imzjw.cn/categories/%E7%94%9F%E6%B4%BB/%E6%97%A5%E5%BF%97/"/>
-    
-    
-    <category term="Linux" scheme="https://blog.imzjw.cn/tags/Linux/"/>
     
     <category term="宝塔面板" scheme="https://blog.imzjw.cn/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/"/>
     
@@ -496,12 +496,10 @@
     
     <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
     
-    <category term="Butterfly" scheme="https://blog.imzjw.cn/categories/Hexo/Butterfly/"/>
-    
     
     <category term="Hexo" scheme="https://blog.imzjw.cn/tags/Hexo/"/>
     
-    <category term="Butterfly" scheme="https://blog.imzjw.cn/tags/Butterfly/"/>
+    <category term="CDN" scheme="https://blog.imzjw.cn/tags/CDN/"/>
     
   </entry>
   
@@ -521,10 +519,6 @@
     
     <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
     
-    <category term="Butterfly" scheme="https://blog.imzjw.cn/categories/Hexo/Butterfly/"/>
-    
-    
-    <category term="Hexo" scheme="https://blog.imzjw.cn/tags/Hexo/"/>
     
     <category term="Butterfly" scheme="https://blog.imzjw.cn/tags/Butterfly/"/>
     
@@ -544,9 +538,7 @@
     
     
     
-    <category term="生活" scheme="https://blog.imzjw.cn/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    <category term="日志" scheme="https://blog.imzjw.cn/categories/%E7%94%9F%E6%B4%BB/%E6%97%A5%E5%BF%97/"/>
+    <category term="经验分享" scheme="https://blog.imzjw.cn/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="Vercel" scheme="https://blog.imzjw.cn/tags/Vercel/"/>
@@ -569,12 +561,8 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
-    <category term="Java" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Java/"/>
-    
-    
-    <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/tags/IntelliJ-IDEA/"/>
     
     <category term="Json" scheme="https://blog.imzjw.cn/tags/Json/"/>
     
@@ -596,10 +584,10 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
-    <category term="Telegram Bot" scheme="https://blog.imzjw.cn/tags/Telegram-Bot/"/>
+    <category term="Telegram" scheme="https://blog.imzjw.cn/tags/Telegram/"/>
     
   </entry>
   
@@ -617,9 +605,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring Boot" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring-Boot/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring Boot" scheme="https://blog.imzjw.cn/tags/Spring-Boot/"/>
@@ -642,9 +628,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/IntelliJ-IDEA/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/tags/IntelliJ-IDEA/"/>
@@ -665,9 +649,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring" scheme="https://blog.imzjw.cn/tags/Spring/"/>
@@ -688,9 +670,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring Boot" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring-Boot/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring Boot" scheme="https://blog.imzjw.cn/tags/Spring-Boot/"/>
@@ -711,9 +691,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Nexus" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Nexus/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Nexus" scheme="https://blog.imzjw.cn/tags/Nexus/"/>
@@ -734,10 +712,10 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
-    <category term="自动化构建" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA/"/>
     
+    <category term="Spring Boot" scheme="https://blog.imzjw.cn/tags/Spring-Boot/"/>
     
     <category term="Gradle" scheme="https://blog.imzjw.cn/tags/Gradle/"/>
     
@@ -757,7 +735,7 @@
     
     
     
-    <category term="网站搭建" scheme="https://blog.imzjw.cn/categories/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="书签" scheme="https://blog.imzjw.cn/tags/%E4%B9%A6%E7%AD%BE/"/>
@@ -780,14 +758,12 @@
     
     
     
-    <category term="前端" scheme="https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
-    <category term="Vue" scheme="https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/Vue/"/>
-    
-    
-    <category term="Vue" scheme="https://blog.imzjw.cn/tags/Vue/"/>
     
     <category term="宝塔面板" scheme="https://blog.imzjw.cn/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/"/>
+    
+    <category term="Vue" scheme="https://blog.imzjw.cn/tags/Vue/"/>
     
   </entry>
   
@@ -805,9 +781,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="NoSQL" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/NoSQL/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Redis" scheme="https://blog.imzjw.cn/tags/Redis/"/>
@@ -828,9 +802,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="GitHub" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/GitHub/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="GitHub" scheme="https://blog.imzjw.cn/tags/GitHub/"/>
@@ -851,11 +823,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="MyBatis" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/MyBatis/"/>
-    
-    <category term="Spring Boot" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring-Boot/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MyBatis" scheme="https://blog.imzjw.cn/tags/MyBatis/"/>
@@ -878,9 +846,7 @@
     
     
     
-    <category term="前端" scheme="https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    <category term="Google" scheme="https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/Google/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="Google" scheme="https://blog.imzjw.cn/tags/Google/"/>
@@ -901,9 +867,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring Boot" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring-Boot/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Redis" scheme="https://blog.imzjw.cn/tags/Redis/"/>
@@ -926,14 +890,10 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="SQL" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/SQL/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MySQL" scheme="https://blog.imzjw.cn/tags/MySQL/"/>
-    
-    <category term="Druid" scheme="https://blog.imzjw.cn/tags/Druid/"/>
     
   </entry>
   
@@ -951,9 +911,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/IntelliJ-IDEA/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/tags/IntelliJ-IDEA/"/>
@@ -974,9 +932,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring Boot" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring-Boot/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MyBatis" scheme="https://blog.imzjw.cn/tags/MyBatis/"/>
@@ -999,9 +955,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="MyBatis" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/MyBatis/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MyBatis" scheme="https://blog.imzjw.cn/tags/MyBatis/"/>
@@ -1022,9 +976,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="MyBatis" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/MyBatis/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MyBatis" scheme="https://blog.imzjw.cn/tags/MyBatis/"/>
@@ -1045,9 +997,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/IntelliJ-IDEA/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/tags/IntelliJ-IDEA/"/>
@@ -1068,12 +1018,8 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
-    <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/IntelliJ-IDEA/"/>
-    
-    
-    <category term="MyBatis" scheme="https://blog.imzjw.cn/tags/MyBatis/"/>
     
     <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/tags/IntelliJ-IDEA/"/>
     
@@ -1093,9 +1039,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="SQL" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/SQL/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MySQL" scheme="https://blog.imzjw.cn/tags/MySQL/"/>
@@ -1116,14 +1060,10 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring Boot" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring-Boot/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring Boot" scheme="https://blog.imzjw.cn/tags/Spring-Boot/"/>
-    
-    <category term="Spring Boot Actuator" scheme="https://blog.imzjw.cn/tags/Spring-Boot-Actuator/"/>
     
   </entry>
   
@@ -1141,12 +1081,10 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
-    
-    <category term="Microsoft OneDrive" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/Microsoft-OneDrive/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
-    <category term="Microsoft OneDrive" scheme="https://blog.imzjw.cn/tags/Microsoft-OneDrive/"/>
+    <category term="Microsoft" scheme="https://blog.imzjw.cn/tags/Microsoft/"/>
     
   </entry>
   
@@ -1164,16 +1102,10 @@
     
     
     
-    <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
-    <category term="图床" scheme="https://blog.imzjw.cn/categories/Hexo/%E5%9B%BE%E5%BA%8A/"/>
-    
-    
-    <category term="GitHub" scheme="https://blog.imzjw.cn/tags/GitHub/"/>
     
     <category term="图床" scheme="https://blog.imzjw.cn/tags/%E5%9B%BE%E5%BA%8A/"/>
-    
-    <category term="jsDelivr" scheme="https://blog.imzjw.cn/tags/jsDelivr/"/>
     
   </entry>
   
@@ -1193,10 +1125,6 @@
     
     <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
     
-    <category term="Butterfly" scheme="https://blog.imzjw.cn/categories/Hexo/Butterfly/"/>
-    
-    
-    <category term="Hexo" scheme="https://blog.imzjw.cn/tags/Hexo/"/>
     
     <category term="Butterfly" scheme="https://blog.imzjw.cn/tags/Butterfly/"/>
     
@@ -1218,10 +1146,10 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
-    <category term="转存" scheme="https://blog.imzjw.cn/tags/%E8%BD%AC%E5%AD%98/"/>
+    <category term="云盘转存" scheme="https://blog.imzjw.cn/tags/%E4%BA%91%E7%9B%98%E8%BD%AC%E5%AD%98/"/>
     
   </entry>
   
@@ -1239,12 +1167,10 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="资源搜索" scheme="https://blog.imzjw.cn/tags/%E8%B5%84%E6%BA%90%E6%90%9C%E7%B4%A2/"/>
-    
-    <category term="下载网站" scheme="https://blog.imzjw.cn/tags/%E4%B8%8B%E8%BD%BD%E7%BD%91%E7%AB%99/"/>
     
   </entry>
   
@@ -1262,7 +1188,7 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="screw" scheme="https://blog.imzjw.cn/tags/screw/"/>
@@ -1283,9 +1209,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring" scheme="https://blog.imzjw.cn/tags/Spring/"/>
@@ -1306,9 +1230,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring" scheme="https://blog.imzjw.cn/tags/Spring/"/>
@@ -1329,9 +1251,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring" scheme="https://blog.imzjw.cn/tags/Spring/"/>
@@ -1352,9 +1272,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring" scheme="https://blog.imzjw.cn/tags/Spring/"/>
@@ -1375,9 +1293,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring" scheme="https://blog.imzjw.cn/tags/Spring/"/>
@@ -1404,14 +1320,10 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="GitHub" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/GitHub/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="GitHub Actions" scheme="https://blog.imzjw.cn/tags/GitHub-Actions/"/>
-    
-    <category term="贴吧" scheme="https://blog.imzjw.cn/tags/%E8%B4%B4%E5%90%A7/"/>
     
   </entry>
   
@@ -1450,9 +1362,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring Boot" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring-Boot/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring Boot" scheme="https://blog.imzjw.cn/tags/Spring-Boot/"/>
@@ -1473,9 +1383,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Qodana" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Qodana/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Qodana" scheme="https://blog.imzjw.cn/tags/Qodana/"/>
@@ -1502,14 +1410,10 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Git" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Git/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="Git" scheme="https://blog.imzjw.cn/tags/Git/"/>
-    
-    <category term="GitHub" scheme="https://blog.imzjw.cn/tags/GitHub/"/>
     
   </entry>
   
@@ -1527,14 +1431,8 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
-    <category term="Spring Boot" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring-Boot/"/>
-    
-    
-    <category term="Docker" scheme="https://blog.imzjw.cn/tags/Docker/"/>
-    
-    <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/tags/IntelliJ-IDEA/"/>
     
     <category term="Spring Boot" scheme="https://blog.imzjw.cn/tags/Spring-Boot/"/>
     
@@ -1554,9 +1452,9 @@
     
     
     
-    <category term="前端" scheme="https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
-    <category term="Vue" scheme="https://blog.imzjw.cn/categories/%E5%89%8D%E7%AB%AF/Vue/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Vue" scheme="https://blog.imzjw.cn/tags/Vue/"/>
@@ -1577,9 +1475,7 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
-    
-    <category term="壁纸" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/%E5%A3%81%E7%BA%B8/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="壁纸" scheme="https://blog.imzjw.cn/tags/%E5%A3%81%E7%BA%B8/"/>
@@ -1600,9 +1496,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Nginx" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Nginx/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Nginx" scheme="https://blog.imzjw.cn/tags/Nginx/"/>
@@ -1629,9 +1523,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Lombok" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Lombok/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Lombok" scheme="https://blog.imzjw.cn/tags/Lombok/"/>
@@ -1652,16 +1544,10 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Java" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Java/"/>
-    
-    <category term="MyBatis" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/MyBatis/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MyBatis" scheme="https://blog.imzjw.cn/tags/MyBatis/"/>
-    
-    <category term="Java复习" scheme="https://blog.imzjw.cn/tags/Java%E5%A4%8D%E4%B9%A0/"/>
     
   </entry>
   
@@ -1681,10 +1567,6 @@
     
     <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
     
-    <category term="Twikoo" scheme="https://blog.imzjw.cn/categories/Hexo/Twikoo/"/>
-    
-    
-    <category term="Hexo" scheme="https://blog.imzjw.cn/tags/Hexo/"/>
     
     <category term="Twikoo" scheme="https://blog.imzjw.cn/tags/Twikoo/"/>
     
@@ -1704,20 +1586,10 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
-    <category term="Java" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Java/"/>
-    
-    
-    <category term="MyBatis" scheme="https://blog.imzjw.cn/tags/MyBatis/"/>
-    
-    <category term="Java复习" scheme="https://blog.imzjw.cn/tags/Java%E5%A4%8D%E4%B9%A0/"/>
-    
-    <category term="Spring" scheme="https://blog.imzjw.cn/tags/Spring/"/>
     
     <category term="SSM" scheme="https://blog.imzjw.cn/tags/SSM/"/>
-    
-    <category term="Spring MVC" scheme="https://blog.imzjw.cn/tags/Spring-MVC/"/>
     
   </entry>
   
@@ -1735,9 +1607,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring" scheme="https://blog.imzjw.cn/tags/Spring/"/>
@@ -1758,9 +1628,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="GitHub" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/GitHub/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="GitHub" scheme="https://blog.imzjw.cn/tags/GitHub/"/>
@@ -1781,10 +1649,8 @@
     
     
     
-    <category term="网站搭建" scheme="https://blog.imzjw.cn/categories/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
-    
-    <category term="宝塔面板" scheme="https://blog.imzjw.cn/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/"/>
     
     <category term="Typecho" scheme="https://blog.imzjw.cn/tags/Typecho/"/>
     
@@ -1804,9 +1670,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="自动化构建" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Maven" scheme="https://blog.imzjw.cn/tags/Maven/"/>
@@ -1827,9 +1691,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Java" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Java/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="论坛" scheme="https://blog.imzjw.cn/tags/%E8%AE%BA%E5%9D%9B/"/>
@@ -1850,12 +1712,10 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Java" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Java/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
-    <category term="Java复习" scheme="https://blog.imzjw.cn/tags/Java%E5%A4%8D%E4%B9%A0/"/>
+    <category term="Java" scheme="https://blog.imzjw.cn/tags/Java/"/>
     
   </entry>
   
@@ -1873,9 +1733,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="SQL" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/SQL/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MySQL" scheme="https://blog.imzjw.cn/tags/MySQL/"/>
@@ -1896,9 +1754,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring Cloud" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring-Cloud/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring Cloud" scheme="https://blog.imzjw.cn/tags/Spring-Cloud/"/>
@@ -1919,9 +1775,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Git" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Git/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Git" scheme="https://blog.imzjw.cn/tags/Git/"/>
@@ -1942,9 +1796,7 @@
     
     
     
-    <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
-    
-    <category term="jsDelivr" scheme="https://blog.imzjw.cn/categories/Hexo/jsDelivr/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="jsDelivr" scheme="https://blog.imzjw.cn/tags/jsDelivr/"/>
@@ -1961,13 +1813,11 @@
     <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><code>工厂模式</code> 是一种创建型设计模式，其在父类中提供一个创建对象的方法，允许子类决定实例化对象的类型。</p><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>假如我们开发项目中的日志模块，业务初期只有控制台日志，大部分代码都在控制台日志类。随着业务发展，希望可以增加文件日志功能。</p><p>如果代码之间已经存在耦合关系，此时向程序添加新类并不是一件简单的事情。目前大部分代码都与控制台日志类有关。添加文件日志类需要修改全部代码，更可怕的是以后万一要拓展其他日志类，很可能需要再次大幅修改代码。</p><p>如此反复反复，恭喜, 成功诞生一份不可维护的祖传代码。 😂</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>工厂方法模式建议使用特殊的工厂方法代替直接调用 <code>new</code> 关键字创建对象。工厂方法返回的对象通常被称作 “产品”。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Logger</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">log</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConsoleLogger</span> <span class="keyword">extends</span> <span class="title class_">Logger</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">log</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是控制台日志器！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileLogger</span> <span class="keyword">extends</span> <span class="title class_">Logger</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">log</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是文件日志器！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>紧接着我们再创建一个工厂类，这里声明为抽象类，并且设置一个抽象方法，强制子类实现抽象方法。你也可以不设置成抽象类，在基础工厂方法中返回默认类型。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">LoggerFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> Logger <span class="title function_">createLogger</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConsoleLoggerFactory</span> <span class="keyword">extends</span> <span class="title class_">LoggerFactory</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Logger <span class="title function_">createLogger</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ConsoleLogger</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileLoggerFactory</span> <span class="keyword">extends</span> <span class="title class_">LoggerFactory</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Logger <span class="title function_">createLogger</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">FileLogger</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="https://npm.elemecdn.com/cpdd/posts/designMode-factory/factory.webp" alt="img"></p><p>乍看之下，工厂模式看起来毫无意义，只是改变了程序中调用构造函数的位置而已。但是我们可以在子类里重写工厂方法，从而改变其创建产品的类型。</p><p>但有一点需要注意，仅当这些产品具有共同的父类或者接口时，工厂子类才能返回不同类型的产品。同时工厂基类的工厂方法还应将其返回类型声明为共有接口。</p><p>只要产品类实现一个共同的接口，就可以将它传递给客户代码，而无需提供任何额外的数据。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> LoggerFactory loggerFactory;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Application</span><span class="params">(LoggerFactory loggerFactory)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.loggerFactory = loggerFactory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> loggerFactory.createLogger();</span><br><span class="line">        logger.log();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>客户端代码仅通过抽象类型使用工厂和产品，如需要添加新的产品，仅需实现工厂抽象类和产品抽象类即可。无需修改原有的工厂或者产品类。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这是重新学习工厂模式的笔记，其中可能有很多地方写的不对，写得不好，欢迎大家指正 👏</p>]]></content>
     
     
-    <summary type="html">工厂模式 是一种创建型设计模式，其在父类中提供一个创建对象的方法，允许子类决定实例化对象的类型。场景：假如我们开发项目中的日志模块...</summary>
+    <summary type="html">工厂模式 是一种创建型设计模式，其在父类中提供一个创建对象的方法，允许子类决定实例化对象的类型。场景：假如我们开发项目中的日志模块</summary>
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="设计模式" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="设计模式" scheme="https://blog.imzjw.cn/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
@@ -1988,9 +1838,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="设计模式" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="设计模式" scheme="https://blog.imzjw.cn/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
@@ -2014,11 +1862,7 @@
     <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
     
     
-    <category term="GitHub" scheme="https://blog.imzjw.cn/tags/GitHub/"/>
-    
     <category term="GitHub Actions" scheme="https://blog.imzjw.cn/tags/GitHub-Actions/"/>
-    
-    <category term="Hexo" scheme="https://blog.imzjw.cn/tags/Hexo/"/>
     
   </entry>
   
@@ -2037,8 +1881,6 @@
     
     
     <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
-    
-    <category term="Valine" scheme="https://blog.imzjw.cn/categories/Hexo/Valine/"/>
     
     
     <category term="Valine" scheme="https://blog.imzjw.cn/tags/Valine/"/>
@@ -2061,8 +1903,6 @@
     
     <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
     
-    <category term="Vercel" scheme="https://blog.imzjw.cn/categories/Hexo/Vercel/"/>
-    
     
     <category term="Vercel" scheme="https://blog.imzjw.cn/tags/Vercel/"/>
     
@@ -2082,9 +1922,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Spring Boot" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Spring-Boot/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Spring Boot" scheme="https://blog.imzjw.cn/tags/Spring-Boot/"/>
@@ -2105,9 +1943,7 @@
     
     
     
-    <category term="操作系统" scheme="https://blog.imzjw.cn/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    <category term="Linux" scheme="https://blog.imzjw.cn/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Linux" scheme="https://blog.imzjw.cn/tags/Linux/"/>
@@ -2149,9 +1985,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="SQL" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/SQL/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MySQL" scheme="https://blog.imzjw.cn/tags/MySQL/"/>
@@ -2172,9 +2006,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="GitHub" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/GitHub/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="GitHub" scheme="https://blog.imzjw.cn/tags/GitHub/"/>
@@ -2195,12 +2027,12 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Docker" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Docker/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Docker" scheme="https://blog.imzjw.cn/tags/Docker/"/>
+    
+    <category term="Oracle" scheme="https://blog.imzjw.cn/tags/Oracle/"/>
     
   </entry>
   
@@ -2218,9 +2050,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="MyBatis" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/MyBatis/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MyBatis" scheme="https://blog.imzjw.cn/tags/MyBatis/"/>
@@ -2241,9 +2071,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/IntelliJ-IDEA/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/tags/IntelliJ-IDEA/"/>
@@ -2264,9 +2092,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="RabbitMQ" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/RabbitMQ/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="RabbitMQ" scheme="https://blog.imzjw.cn/tags/RabbitMQ/"/>
@@ -2287,7 +2113,7 @@
     
     
     
-    <category term="干货" scheme="https://blog.imzjw.cn/categories/%E5%B9%B2%E8%B4%A7/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
     
     <category term="在线网站" scheme="https://blog.imzjw.cn/tags/%E5%9C%A8%E7%BA%BF%E7%BD%91%E7%AB%99/"/>
@@ -2308,9 +2134,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="RabbitMQ" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/RabbitMQ/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="RabbitMQ" scheme="https://blog.imzjw.cn/tags/RabbitMQ/"/>
@@ -2331,9 +2155,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="RabbitMQ" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/RabbitMQ/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="RabbitMQ" scheme="https://blog.imzjw.cn/tags/RabbitMQ/"/>
@@ -2354,9 +2176,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="NoSQL" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/NoSQL/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Redis" scheme="https://blog.imzjw.cn/tags/Redis/"/>
@@ -2377,9 +2197,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="NoSQL" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/NoSQL/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Redis" scheme="https://blog.imzjw.cn/tags/Redis/"/>
@@ -2421,9 +2239,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Docker" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Docker/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Docker" scheme="https://blog.imzjw.cn/tags/Docker/"/>
@@ -2444,12 +2260,8 @@
     
     
     
-    <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
+    <category term="实用分享" scheme="https://blog.imzjw.cn/categories/%E5%AE%9E%E7%94%A8%E5%88%86%E4%BA%AB/"/>
     
-    <category term="图床" scheme="https://blog.imzjw.cn/categories/Hexo/%E5%9B%BE%E5%BA%8A/"/>
-    
-    
-    <category term="GitHub" scheme="https://blog.imzjw.cn/tags/GitHub/"/>
     
     <category term="图床" scheme="https://blog.imzjw.cn/tags/%E5%9B%BE%E5%BA%8A/"/>
     
@@ -2469,9 +2281,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="MyBatis-Plus" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/MyBatis-Plus/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MyBatis-Plus" scheme="https://blog.imzjw.cn/tags/MyBatis-Plus/"/>
@@ -2479,7 +2289,7 @@
   </entry>
   
   <entry>
-    <title>valine修改邮件样式</title>
+    <title>valine 修改邮件样式</title>
     <link href="https://blog.imzjw.cn/posts/d110/"/>
     <id>https://blog.imzjw.cn/posts/d110/</id>
     <published>2020-04-25T14:37:20.000Z</published>
@@ -2494,10 +2304,6 @@
     
     <category term="Hexo" scheme="https://blog.imzjw.cn/categories/Hexo/"/>
     
-    <category term="Valine" scheme="https://blog.imzjw.cn/categories/Hexo/Valine/"/>
-    
-    
-    <category term="Hexo" scheme="https://blog.imzjw.cn/tags/Hexo/"/>
     
     <category term="Valine" scheme="https://blog.imzjw.cn/tags/Valine/"/>
     
@@ -2517,9 +2323,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="Java" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/Java/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Java" scheme="https://blog.imzjw.cn/tags/Java/"/>
@@ -2540,12 +2344,10 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/IntelliJ-IDEA/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
-    <category term="JRebel" scheme="https://blog.imzjw.cn/tags/JRebel/"/>
+    <category term="IntelliJ IDEA" scheme="https://blog.imzjw.cn/tags/IntelliJ-IDEA/"/>
     
   </entry>
   
@@ -2563,9 +2365,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="MyBatis" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/MyBatis/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="MyBatis" scheme="https://blog.imzjw.cn/tags/MyBatis/"/>
@@ -2586,9 +2386,7 @@
     
     
     
-    <category term="后端" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="WEB应用服务器" scheme="https://blog.imzjw.cn/categories/%E5%90%8E%E7%AB%AF/WEB%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <category term="Develop" scheme="https://blog.imzjw.cn/categories/Develop/"/>
     
     
     <category term="Tomcat" scheme="https://blog.imzjw.cn/tags/Tomcat/"/>

@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>重新整理部落格分类</title>
+      <link href="/posts/88c14d33/"/>
+      <url>/posts/88c14d33/</url>
+      
+        <content type="html"><![CDATA[<p>在今天下午，我把我部落格分类重新整理了个遍</p><p>原分类：</p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/88c14d33/240422-a59c133159018b97.webp" alt="image-20240422183346865"></p><p>又臭又长！</p><p>整理后的分类：</p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/88c14d33/240422-3f9d33e6696cca9c.webp" alt="image-20240422183414297"></p><p>干净简洁！</p><p>分类说明：</p><ul><li><strong>Develop</strong>：放一些关于后端的、前端的、Linux，总之有关开发的都放在这了</li><li><strong>Hexo</strong>：见其字如知其意</li><li><strong>实用分享</strong>：分享一些实用的工具、网站、好玩的东西等</li><li><strong>经验分享</strong>：记录自己踩下的坑</li><li><strong>闲聊杂话</strong>：瞎扯，比如这篇文章😁</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 闲聊杂话 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>解决网站 URL 加个 index.html 后 Twikoo 评论不显示问题</title>
+      <link href="/posts/51a5d1ca/"/>
+      <url>/posts/51a5d1ca/</url>
+      
+        <content type="html"><![CDATA[<p>其实这问题也是最开始的时候用 <code>hexo-abbrlink</code> 规则没配置好，导致它可以在后面加个 <strong>index.html</strong></p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/51a5d1ca/240422-21830a3e04f6f401.webp" alt="image-20240422155420310"></p><p>这种规则的话，它是可以在后面加个 <strong>index.html</strong> 的</p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/51a5d1ca/240422-e86c645986191f8f.webp" alt="image-20240422155648132"></p><p>那这样的话就是两个页面了，所以在 <code>/posts/b74f504f/</code> 页面的评论在 <code>/posts/b74f504f/index.html</code> 是看不到的。</p><h2 id="解决措施"><a href="#解决措施" class="headerlink" title="解决措施"></a>解决措施</h2><p>你可以用 Navicat Premium 15 登录 MongoDB 进行修改，吧所有后面带 index.html 的删了。<psw>嘿嘿，开个玩笑</psw></p><p>在 Twikoo 初始函数的时候添加 <code>location.pathname.replace(/index\.html$/, &#39;&#39;),</code></p><p>Butterfly 主题可以在 <code>themes\butterfly\layout\includes\third-party\comments\twikoo.pug</code> 进行修改，其它主题的话，就找到这段代码加上就好了</p><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const init = () =&gt; &#123;</span><br><span class="line">      twikoo.init(Object.assign(&#123;</span><br><span class="line">        el: &#x27;#twikoo-wrap&#x27;,</span><br><span class="line">        envId: &#x27;!&#123;envId&#125;&#x27;,</span><br><span class="line"><span class="addition">+        path: location.pathname.replace(/index\.html$/, &#x27;&#x27;),</span></span><br><span class="line">        region: &#x27;!&#123;region&#125;&#x27;,</span><br><span class="line">        onCommentLoaded: () =&gt; &#123;</span><br><span class="line">          btf.loadLightbox(document.querySelectorAll(&#x27;#twikoo .tk-content img:not(.tk-owo-emotion)&#x27;))</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, !&#123;JSON.stringify(option)&#125;))</span><br></pre></td></tr></table></figure><p>现在不管怎么请求 <strong>index.html</strong>，他请求的数据都是没有带 <strong>index.html</strong> 的了，响应回来的数据也是一样的了。</p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/51a5d1ca/240422-3ade940cf6cb6796.webp" alt="image-20240422162918881" style="zoom:50%;" /></p><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>新站的话链接规则改成 <code>posts/:abbrlink.html</code> 就没这个问题了，老站还是不要改了。</p><p><img src="https://jsd.cdn.zzko.cn/gh/ycubaby/ycu-assets/p/51a5d1ca/240422-3c0a232d2c336dcd.webp" alt="image-20240422163317952"></p><p>参考</p><ul><li><a href="https://github.com/twikoojs/twikoo/issues/608">issues</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> Twikoo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>分享几个免费使用 GPT-4、GPT-4 Turbo、DALL-E 3 等大模型 AI</title>
       <link href="/posts/ff838eeb/"/>
       <url>/posts/ff838eeb/</url>
@@ -13,7 +65,7 @@
       
       <categories>
           
-          <category> 干货 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -45,10 +97,6 @@
       
         <tags>
             
-            <tag> GitHub Actions </tag>
-            
-            <tag> Hexo </tag>
-            
             <tag> 多吉云 </tag>
             
         </tags>
@@ -67,9 +115,7 @@
       
       <categories>
           
-          <category> 生活 </category>
-          
-          <category> 日志 </category>
+          <category> 经验分享 </category>
           
       </categories>
       
@@ -119,9 +165,7 @@
       
       <categories>
           
-          <category> 生活 </category>
-          
-          <category> 日志 </category>
+          <category> 闲聊杂话 </category>
           
       </categories>
       
@@ -146,9 +190,7 @@
       
       <categories>
           
-          <category> 干货 </category>
-          
-          <category> 网站搭建 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -156,10 +198,6 @@
         <tags>
             
             <tag> 图床 </tag>
-            
-            <tag> Alist </tag>
-            
-            <tag> PicList </tag>
             
         </tags>
       
@@ -177,16 +215,14 @@
       
       <categories>
           
-          <category> 干货 </category>
-          
-          <category> Microsoft OneDrive </category>
+          <category> 实用分享 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Microsoft OneDrive </tag>
+            <tag> Microsoft </tag>
             
         </tags>
       
@@ -204,14 +240,14 @@
       
       <categories>
           
-          <category> 干货 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 下载 </tag>
+            <tag> 哔哩哔哩 </tag>
             
         </tags>
       
@@ -229,9 +265,7 @@
       
       <categories>
           
-          <category> 干货 </category>
-          
-          <category> 壁纸 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -256,14 +290,14 @@
       
       <categories>
           
-          <category> 干货 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Office 365 E5 </tag>
+            <tag> Microsoft </tag>
             
         </tags>
       
@@ -281,9 +315,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Java </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -308,9 +340,7 @@
       
       <categories>
           
-          <category> 干货 </category>
-          
-          <category> 网易云 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -335,9 +365,7 @@
       
       <categories>
           
-          <category> 干货 </category>
-          
-          <category> RSS </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -345,8 +373,6 @@
         <tags>
             
             <tag> RSS </tag>
-            
-            <tag> inkrss </tag>
             
         </tags>
       
@@ -364,18 +390,12 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> GitHub </category>
-          
-          <category> Docker </category>
+          <category> Develop </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> Docker </tag>
             
             <tag> GitHub Actions </tag>
             
@@ -395,9 +415,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Git </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -422,16 +440,12 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring Boot </category>
+          <category> Develop </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> GitHub Actions </tag>
             
             <tag> Spring Boot </tag>
             
@@ -451,14 +465,14 @@
       
       <categories>
           
-          <category> 干货 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 资源存储 </tag>
+            <tag> 小白羊 </tag>
             
         </tags>
       
@@ -476,7 +490,7 @@
       
       <categories>
           
-          <category> 干货 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -501,9 +515,7 @@
       
       <categories>
           
-          <category> 干货 </category>
-          
-          <category> 临时邮箱 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -528,16 +540,12 @@
       
       <categories>
           
-          <category> 生活 </category>
-          
-          <category> 日志 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> Linux </tag>
             
             <tag> 宝塔面板 </tag>
             
@@ -559,8 +567,6 @@
           
           <category> Hexo </category>
           
-          <category> Butterfly </category>
-          
       </categories>
       
       
@@ -568,7 +574,7 @@
             
             <tag> Hexo </tag>
             
-            <tag> Butterfly </tag>
+            <tag> CDN </tag>
             
         </tags>
       
@@ -588,14 +594,10 @@
           
           <category> Hexo </category>
           
-          <category> Butterfly </category>
-          
       </categories>
       
       
         <tags>
-            
-            <tag> Hexo </tag>
             
             <tag> Butterfly </tag>
             
@@ -615,9 +617,7 @@
       
       <categories>
           
-          <category> 生活 </category>
-          
-          <category> 日志 </category>
+          <category> 经验分享 </category>
           
       </categories>
       
@@ -644,16 +644,12 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Java </category>
+          <category> Develop </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> IntelliJ IDEA </tag>
             
             <tag> Json </tag>
             
@@ -675,14 +671,14 @@
       
       <categories>
           
-          <category> 干货 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Telegram Bot </tag>
+            <tag> Telegram </tag>
             
         </tags>
       
@@ -700,9 +696,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring Boot </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -729,9 +723,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> IntelliJ IDEA </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -756,9 +748,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -783,9 +773,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring Boot </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -810,9 +798,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Nexus </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -837,14 +823,14 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> 自动化构建 </category>
+          <category> Develop </category>
           
       </categories>
       
       
         <tags>
+            
+            <tag> Spring Boot </tag>
             
             <tag> Gradle </tag>
             
@@ -864,7 +850,7 @@
       
       <categories>
           
-          <category> 网站搭建 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -891,18 +877,16 @@
       
       <categories>
           
-          <category> 前端 </category>
-          
-          <category> Vue </category>
+          <category> Develop </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Vue </tag>
-            
             <tag> 宝塔面板 </tag>
+            
+            <tag> Vue </tag>
             
         </tags>
       
@@ -920,9 +904,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> NoSQL </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -947,9 +929,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> GitHub </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -974,11 +954,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> MyBatis </category>
-          
-          <category> Spring Boot </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1005,9 +981,7 @@
       
       <categories>
           
-          <category> 前端 </category>
-          
-          <category> Google </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -1032,9 +1006,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring Boot </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1061,9 +1033,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> SQL </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1071,8 +1041,6 @@
         <tags>
             
             <tag> MySQL </tag>
-            
-            <tag> Druid </tag>
             
         </tags>
       
@@ -1090,9 +1058,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> IntelliJ IDEA </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1117,9 +1083,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring Boot </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1146,9 +1110,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> MyBatis </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1173,9 +1135,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> MyBatis </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1200,9 +1160,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> IntelliJ IDEA </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1227,16 +1185,12 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> IntelliJ IDEA </category>
+          <category> Develop </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> MyBatis </tag>
             
             <tag> IntelliJ IDEA </tag>
             
@@ -1256,9 +1210,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> SQL </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1283,9 +1235,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring Boot </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1293,8 +1243,6 @@
         <tags>
             
             <tag> Spring Boot </tag>
-            
-            <tag> Spring Boot Actuator </tag>
             
         </tags>
       
@@ -1312,16 +1260,14 @@
       
       <categories>
           
-          <category> 干货 </category>
-          
-          <category> Microsoft OneDrive </category>
+          <category> 实用分享 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Microsoft OneDrive </tag>
+            <tag> Microsoft </tag>
             
         </tags>
       
@@ -1339,20 +1285,14 @@
       
       <categories>
           
-          <category> Hexo </category>
-          
-          <category> 图床 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> GitHub </tag>
-            
             <tag> 图床 </tag>
-            
-            <tag> jsDelivr </tag>
             
         </tags>
       
@@ -1372,14 +1312,10 @@
           
           <category> Hexo </category>
           
-          <category> Butterfly </category>
-          
       </categories>
       
       
         <tags>
-            
-            <tag> Hexo </tag>
             
             <tag> Butterfly </tag>
             
@@ -1401,14 +1337,14 @@
       
       <categories>
           
-          <category> 干货 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 转存 </tag>
+            <tag> 云盘转存 </tag>
             
         </tags>
       
@@ -1426,7 +1362,7 @@
       
       <categories>
           
-          <category> 干货 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -1434,8 +1370,6 @@
         <tags>
             
             <tag> 资源搜索 </tag>
-            
-            <tag> 下载网站 </tag>
             
         </tags>
       
@@ -1453,7 +1387,7 @@
       
       <categories>
           
-          <category> 干货 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -1478,9 +1412,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1505,9 +1437,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1532,9 +1462,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1559,9 +1487,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1586,9 +1512,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1613,9 +1537,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> GitHub </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -1623,8 +1545,6 @@
         <tags>
             
             <tag> GitHub Actions </tag>
-            
-            <tag> 贴吧 </tag>
             
         </tags>
       
@@ -1667,9 +1587,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring Boot </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1694,9 +1612,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Qodana </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1721,9 +1637,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Git </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -1731,8 +1645,6 @@
         <tags>
             
             <tag> Git </tag>
-            
-            <tag> GitHub </tag>
             
         </tags>
       
@@ -1750,18 +1662,12 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring Boot </category>
+          <category> Develop </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> Docker </tag>
-            
-            <tag> IntelliJ IDEA </tag>
             
             <tag> Spring Boot </tag>
             
@@ -1781,9 +1687,9 @@
       
       <categories>
           
-          <category> 前端 </category>
+          <category> 实用分享 </category>
           
-          <category> Vue </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1808,9 +1714,7 @@
       
       <categories>
           
-          <category> 干货 </category>
-          
-          <category> 壁纸 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -1835,9 +1739,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Nginx </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1862,9 +1764,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Lombok </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1889,11 +1789,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Java </category>
-          
-          <category> MyBatis </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -1901,8 +1797,6 @@
         <tags>
             
             <tag> MyBatis </tag>
-            
-            <tag> Java复习 </tag>
             
         </tags>
       
@@ -1922,14 +1816,10 @@
           
           <category> Hexo </category>
           
-          <category> Twikoo </category>
-          
       </categories>
       
       
         <tags>
-            
-            <tag> Hexo </tag>
             
             <tag> Twikoo </tag>
             
@@ -1949,24 +1839,14 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Java </category>
+          <category> Develop </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> MyBatis </tag>
-            
-            <tag> Java复习 </tag>
-            
-            <tag> Spring </tag>
-            
             <tag> SSM </tag>
-            
-            <tag> Spring MVC </tag>
             
         </tags>
       
@@ -1984,9 +1864,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2011,9 +1889,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> GitHub </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -2038,14 +1914,12 @@
       
       <categories>
           
-          <category> 网站搭建 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> 宝塔面板 </tag>
             
             <tag> Typecho </tag>
             
@@ -2065,9 +1939,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> 自动化构建 </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2092,9 +1964,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Java </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -2119,16 +1989,14 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Java </category>
+          <category> Develop </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Java复习 </tag>
+            <tag> Java </tag>
             
         </tags>
       
@@ -2146,9 +2014,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> SQL </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2173,9 +2039,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring Cloud </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2200,9 +2064,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Git </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2227,9 +2089,7 @@
       
       <categories>
           
-          <category> Hexo </category>
-          
-          <category> jsDelivr </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -2254,9 +2114,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> 设计模式 </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2281,9 +2139,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> 设计模式 </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2315,11 +2171,7 @@
       
         <tags>
             
-            <tag> GitHub </tag>
-            
             <tag> GitHub Actions </tag>
-            
-            <tag> Hexo </tag>
             
         </tags>
       
@@ -2338,8 +2190,6 @@
       <categories>
           
           <category> Hexo </category>
-          
-          <category> Valine </category>
           
       </categories>
       
@@ -2366,8 +2216,6 @@
           
           <category> Hexo </category>
           
-          <category> Vercel </category>
-          
       </categories>
       
       
@@ -2391,9 +2239,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Spring Boot </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2418,9 +2264,7 @@
       
       <categories>
           
-          <category> 操作系统 </category>
-          
-          <category> Linux </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2470,9 +2314,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> SQL </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2497,9 +2339,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> GitHub </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -2524,9 +2364,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Docker </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2534,6 +2372,8 @@
         <tags>
             
             <tag> Docker </tag>
+            
+            <tag> Oracle </tag>
             
         </tags>
       
@@ -2551,9 +2391,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> MyBatis </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2578,9 +2416,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> IntelliJ IDEA </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2605,9 +2441,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> RabbitMQ </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2632,7 +2466,7 @@
       
       <categories>
           
-          <category> 干货 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
@@ -2657,9 +2491,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> RabbitMQ </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2684,9 +2516,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> RabbitMQ </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2711,9 +2541,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> NoSQL </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2738,9 +2566,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> NoSQL </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2790,9 +2616,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Docker </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2817,16 +2641,12 @@
       
       <categories>
           
-          <category> Hexo </category>
-          
-          <category> 图床 </category>
+          <category> 实用分享 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> GitHub </tag>
             
             <tag> 图床 </tag>
             
@@ -2846,9 +2666,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> MyBatis-Plus </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2864,7 +2682,7 @@
     
     
     <entry>
-      <title>valine修改邮件样式</title>
+      <title>valine 修改邮件样式</title>
       <link href="/posts/d110/"/>
       <url>/posts/d110/</url>
       
@@ -2875,14 +2693,10 @@
           
           <category> Hexo </category>
           
-          <category> Valine </category>
-          
       </categories>
       
       
         <tags>
-            
-            <tag> Hexo </tag>
             
             <tag> Valine </tag>
             
@@ -2902,9 +2716,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> Java </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2929,16 +2741,14 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> IntelliJ IDEA </category>
+          <category> Develop </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> JRebel </tag>
+            <tag> IntelliJ IDEA </tag>
             
         </tags>
       
@@ -2956,9 +2766,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> MyBatis </category>
+          <category> Develop </category>
           
       </categories>
       
@@ -2983,9 +2791,7 @@
       
       <categories>
           
-          <category> 后端 </category>
-          
-          <category> WEB应用服务器 </category>
+          <category> Develop </category>
           
       </categories>
       
